@@ -555,7 +555,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .menu-list {
     flex-direction: column;
     align-items: stretch;
-    gap: 24px; /* egal cu spațiul de deasupra primului buton (padding-top al barei) */
+    gap: 8px; /* spațiu redus între butoane (înainte: 24px); egal cu spațiul din dreapta */
     overflow: visible;
   }
 
