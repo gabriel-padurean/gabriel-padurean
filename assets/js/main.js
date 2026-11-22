@@ -60,37 +60,15 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    /* ---------- Favicon: psihologie / statistică, negru când dispozitivul e în modul zi, alb în modul noapte ---------- */
+    /* ---------- Favicon: psihologie / statistică (culoarea e definită în SVG, după tema dispozitivului) ---------- */
     var FAVICONS = {
-      psihologie: { light: 'assets/media/psychology-icon.svg', dark: 'assets/media/psychology-icon-white.svg' },
-      statistica: { light: 'assets/media/statistics-icon.svg', dark: 'assets/media/statistics-icon-white.svg' }
+      psihologie: 'assets/media/psychology-icon.svg',
+      statistica: 'assets/media/statistics-icon.svg'
     };
-    var currentTab = 'psihologie';
 
-    function updateFavicon() {
-      /* Culoarea depinde doar de tema dispozitivului, nu de comutatorul din pagină */
-      var theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-      var href = FAVICONS[currentTab][theme];
+    function updateFavicon(name) {
       var link = document.getElementById('favicon');
-      if (!link) {
-        /* Înlocuiește variantele statice (după tema dispozitivului) cu una singură, controlată de pagină */
-        Array.prototype.slice.call(document.querySelectorAll('link[rel~="icon"]')).forEach(function (l) {
-          l.parentNode.removeChild(l);
-        });
-        link = document.createElement('link');
-        link.id = 'favicon';
-        link.rel = 'icon';
-        link.type = 'image/svg+xml';
-        document.head.appendChild(link);
-      }
-      if (link.getAttribute('href') !== href) link.setAttribute('href', href);
-    }
-
-    /* Favicon-ul își schimbă culoarea doar când dispozitivul își schimbă tema */
-    if (window.matchMedia) {
-      var faviconMq = window.matchMedia('(prefers-color-scheme: dark)');
-      if (faviconMq.addEventListener) faviconMq.addEventListener('change', updateFavicon);
-      else if (faviconMq.addListener) faviconMq.addListener(updateFavicon);
+      if (link && link.getAttribute('href') !== FAVICONS[name]) link.setAttribute('href', FAVICONS[name]);
     }
 
     var TITLES = { psihologie: 'Psihologia muncii. Evaluare vocațională | Gabriel Pădurean', statistica: 'Statistică: Pregătire teoretică. Proiecte | Gabriel Pădurean' };
@@ -99,8 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function selectTab(name, focus, fromHistory) {
       if (!TITLES[name]) name = 'psihologie';
       document.title = TITLES[name];
-      currentTab = name;
-      updateFavicon();
+      updateFavicon(name);
       /* Ca la o pagină nouă: la schimbarea meniului se revine în partea de sus */
       var activeTab = document.querySelector('.menu-btn.is-active');
       if (activeTab && activeTab.dataset.tab !== name) {
