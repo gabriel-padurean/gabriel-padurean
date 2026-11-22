@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gabriel Pădurean︱Psihologie︱Statistică</title>
+  <title>Gabriel Pădurean︱Psihologie</title>
   <meta name="description" content="Gabriel Pădurean – servicii de psihologia muncii, evaluare vocațională și consultanță în statistică.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -238,7 +238,15 @@
         });
       });
 
-      function selectTab(name, focus) {
+      var TITLES = { psihologie: 'Gabriel Pădurean︱Psihologie', statistica: 'Gabriel Pădurean︱Statistică' };
+
+      /* Fiecare meniu este o „pagină” separată, cu adresa /#psihologie sau /#statistica */
+      function selectTab(name, focus, fromHistory) {
+        if (!TITLES[name]) name = 'psihologie';
+        document.title = TITLES[name];
+        if (location.hash !== '#' + name) {
+          try { history[fromHistory ? 'replaceState' : 'pushState'](null, '', '#' + name); } catch (e) {}
+        }
         tabs.forEach(function (tab) {
           var on = tab.dataset.tab === name;
           tab.classList.toggle('is-active', on);
@@ -256,6 +264,15 @@
         });
       }
 
+      function tabFromHash() {
+        var h = location.hash.replace('#', '');
+        return TITLES[h] ? h : 'psihologie';
+      }
+
+      /* Înapoi / Înainte din browser și linkuri directe */
+      window.addEventListener('popstate', function () { selectTab(tabFromHash(), false, true); });
+      window.addEventListener('hashchange', function () { selectTab(tabFromHash(), false, true); });
+
       tabs.forEach(function (tab, i) {
         tab.addEventListener('click', function () { selectTab(tab.dataset.tab); });
         tab.addEventListener('keydown', function (e) {
@@ -266,6 +283,13 @@
           }
         });
       });
+
+      /* Starea inițială după adresă; fără hash se afișează /#psihologie */
+      var initial = tabFromHash();
+      if (location.hash !== '#' + initial) {
+        try { history.replaceState(null, '', '#' + initial); } catch (e) {}
+      }
+      selectTab(initial, false, true);
 
       /* ---------- Contact: rând derulabil pe ecrane medii/pătrate ---------- */
       (function () {
