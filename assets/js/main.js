@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var root = document.documentElement;
 
     /* Anul curent în footer */
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = ' ' + new Date().getFullYear();
 
     /* ---------- Day / night ---------- */
     /* Urmărește în timp real tema dispozitivului: când se schimbă, pagina o preia
