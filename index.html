@@ -158,7 +158,7 @@
       <section class="section" id="juridic" aria-labelledby="juridic-title">
         <h2 class="section-title" id="juridic-title">Date de identificare</h2>
         <div class="card legal-card">
-          <div class="legal-block">
+          <div class="legal-block" data-legal="psihologie">
             <h3 class="legal-name">PĂDUREAN GABRIEL CABINET INDIVIDUAL DE PSIHOLOGIE</h3>
             <p class="legal-cif">
               <span>CIF: 49646137</span>
@@ -172,7 +172,7 @@
             </a>
           </div>
 
-          <div class="legal-block">
+          <div class="legal-block" data-legal="statistica" hidden>
             <h3 class="legal-name">PĂDUREAN I. D. GABRIEL PERSOANĂ FIZICĂ AUTORIZATĂ</h3>
             <p class="legal-cif">
               <span>CIF: 52353927</span>
@@ -246,6 +246,9 @@
           tab.tabIndex = on ? 0 : -1;
           var panel = document.getElementById('panel-' + tab.dataset.tab);
           panel.hidden = !on;
+          /* Datele de identificare: doar cele ale activității din meniul selectat */
+          var legal = document.querySelector('.legal-block[data-legal="' + tab.dataset.tab + '"]');
+          if (legal) legal.hidden = !on;
           if (on) {
             if (focus) tab.focus({ preventScroll: true });
             tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
