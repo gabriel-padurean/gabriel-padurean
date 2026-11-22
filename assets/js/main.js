@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    var TITLES = { psihologie: 'Pădurean Gabriel - Cabinet individual de psihologie', statistica: 'Gabriel Pădurean - Statistică' };
+    var TITLES = { psihologie: 'Psihologia muncii. Evaluare vocațională | Gabriel Pădurean', statistica: 'Statistică: Pregătire teoretică. Proiecte | Gabriel Pădurean' };
 
     /* Fiecare meniu este o „pagină” separată, cu adresa /#psihologie sau /#statistica */
     function selectTab(name, focus, fromHistory) {
