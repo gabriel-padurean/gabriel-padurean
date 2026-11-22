@@ -445,12 +445,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .legal-name { font-size: .9375rem; font-weight: 600; letter-spacing: .04em; }
 
 .legal-cif {
+  margin-top: 4px; /* distanța vizuală nume → CIF = prețul → nota din carduri (≈14px) */
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: .875rem;
   color: var(--text-muted);
 }
+
+/* Butonul de copiere (36px) nu mai mărește rândul CIF: elimină spațiul în plus de sub text */
+.legal-cif .copy-btn { margin-block: -8px; }
 
 .legal-block .pill-link {
   margin-top: 8px;
