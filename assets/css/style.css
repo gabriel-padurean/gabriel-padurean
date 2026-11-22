@@ -221,7 +221,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   left: 10px;
   right: 10px;
   bottom: 3px; /* ridicată față de marginea listei, ca zona derulabilă (overflow) să nu o taie */
-  height: 1.5px; /* ≈ grosimea conturului iconiței (0.926/12.7 × 20px ≈ 1.46px) */
+  height: 1.75px; /* aproape de grosimea conturului iconiței */
   border-radius: 999px; /* capete rotunjite complet, inclusiv jos */
   background: var(--accent);
   transform: scaleX(0);
@@ -531,6 +531,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
     grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
     align-items: start;
     min-height: calc(100vh - var(--header-h)); /* bara laterală nu depășește niciodată layout-ul => nu mai alunecă la final */
+    min-height: calc(100dvh - var(--header-h)); /* pe tablete, 100vh include zona barei de adrese => bara laterală ar depăși ecranul și s-ar derula; dvh = înălțimea vizibilă reală */
   }
 
   /* Meniul devine bară laterală */
@@ -538,7 +539,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   :root[data-theme="dark"] .menu {
     position: sticky;
     top: var(--header-h);
-    min-height: calc(100vh - var(--header-h) - 1px); /* 1px marjă: pagina are înălțime fracționară și scroll-ul rotunjit ar mișca bara */
+    height: calc(100vh - var(--header-h) - 1px); /* 1px marjă: pagina are înălțime fracționară și scroll-ul rotunjit ar mișca bara */
+    height: calc(100dvh - var(--header-h) - 1px);
+    overflow-y: auto; /* bara rămâne fixă pe ecran; dacă nu încape, se derulează doar ea */
+    overscroll-behavior: contain;
     padding: 24px 8px 24px 0;
     background: var(--surface);
     border-bottom: 0;
