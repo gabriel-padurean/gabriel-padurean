@@ -459,7 +459,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-color: var(--line);
   font-size: .8125rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text);
 }
 .legal-block .pill-link .icon { width: 16px; height: 16px; color: var(--accent); }
 
