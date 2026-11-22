@@ -9,11 +9,11 @@
    id="svg1"
    inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
    sodipodi:docname="statistics-icon.svg"
+   xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
      id="namedview1"
      pagecolor="#ffffff"
      bordercolor="#000000"
@@ -23,32 +23,25 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="12.315443"
-     inkscape:cx="17.86375"
-     inkscape:cy="22.816881"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="41.630912"
+     inkscape:cy="18.384776"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
-  <g
+     inkscape:current-layer="layer1" /><defs
+     id="defs1" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <path
-       style="fill:#000000;stroke:#000000;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill"
+     id="layer1"><path
+       style="fill:#000000;stroke:#4389b5;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill;stroke-opacity:1"
        d="M 9.9163218,6.9453562 V 9.8122969"
-       id="path3" />
-    <path
-       style="fill:#000000;stroke:#000000;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path3" /><path
+       style="fill:none;stroke:#4389b5;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill;stroke-opacity:1;fill-opacity:1"
        d="M 6.3498671,1.8061961 V 9.8122969"
-       id="path2" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path2" /><path
+       style="fill:none;stroke:#4389b5;stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill;stroke-opacity:1"
        d="M 2.7834135,4.402601 V 9.8122969"
-       id="path1" />
-  </g>
-</svg>
+       id="path1" /></g></svg>
