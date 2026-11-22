@@ -60,12 +60,18 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    var TITLES = { psihologie: 'Gabriel Pădurean︱Psihologie', statistica: 'Gabriel Pădurean︱Statistică' };
+    var TITLES = { psihologie: 'Pădurean Gabriel - Cabinet individual de psihologie', statistica: 'Gabriel Pădurean - Statistică' };
+    var FAVICON_IDS = { 'favicon-svg': 'favicon-%.svg', 'favicon-png': 'favicon-%-32.png', 'favicon-apple': 'apple-touch-%.png' };
 
     /* Fiecare meniu este o „pagină” separată, cu adresa /#psihologie sau /#statistica */
     function selectTab(name, focus, fromHistory) {
       if (!TITLES[name]) name = 'psihologie';
       document.title = TITLES[name];
+      /* Favicon: SVG + PNG (Safari / iOS) pentru meniul curent */
+      Object.keys(FAVICON_IDS).forEach(function (id) {
+        var link = document.getElementById(id);
+        if (link) link.setAttribute('href', 'assets/media/' + FAVICON_IDS[id].replace('%', name === 'statistica' ? 'statistica' : 'psihologie'));
+      });
       /* Ca la o pagină nouă: la schimbarea meniului se revine în partea de sus */
       var activeTab = document.querySelector('.menu-btn.is-active');
       if (activeTab && activeTab.dataset.tab !== name) {
