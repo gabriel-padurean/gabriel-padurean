@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (link && link.getAttribute('href') !== FAVICONS[name]) link.setAttribute('href', FAVICONS[name]);
     }
 
-    var TITLES = { psihologie: 'Psihologia muncii. Evaluare vocațională | Gabriel Pădurean', statistica: 'Statistică: Pregătire teoretică. Proiecte | Gabriel Pădurean' };
+    var TITLES = { psihologie: 'Psihologia muncii. Evaluare vocațională | Gabriel Pădurean', statistica: 'Statistică: Pregătire teoretică. Proiecte de cercetare | Gabriel Pădurean' };
 
     /* Fiecare meniu este o „pagină” separată, cu adresa /#psihologie sau /#statistica */
     function selectTab(name, focus, fromHistory) {
