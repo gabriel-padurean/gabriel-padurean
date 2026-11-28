@@ -36,6 +36,25 @@ document.addEventListener('DOMContentLoaded', function () {
       try { localStorage.setItem('theme', next); } catch (e) {}
     });
 
+    /* ---------- Poziția meniului: în header pe desktop (≥900px), sub header pe mobil ---------- */
+    (function () {
+      var menu = document.querySelector('.menu');
+      var header = document.querySelector('.site-header');
+      var actions = header.querySelector('.header-actions');
+      var layout = document.querySelector('.layout');
+      var mq = window.matchMedia('(min-width: 900px)');
+      function place() {
+        if (mq.matches) {
+          if (menu.parentNode !== header) header.insertBefore(menu, actions);
+        } else if (menu.parentNode !== layout) {
+          layout.insertBefore(menu, layout.firstChild);
+        }
+      }
+      place();
+      if (mq.addEventListener) mq.addEventListener('change', place);
+      else if (mq.addListener) mq.addListener(place);
+    })();
+
     /* ---------- Meniu Psihologie / Statistică (derulabil) ---------- */
     var list = document.querySelector('.menu-list');
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.menu-btn'));
