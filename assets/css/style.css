@@ -15,7 +15,7 @@
   --icon: #2e3842;
   --accent: var(--primary);
   --glass: var(--bg);       /* degradeul săgeților de derulare se contopește cu fundalul */
-  --panel-bg: #ffffff;      /* header, bară laterală, carduri */
+  --panel-bg: #ffffff;      /* header, carduri */
   --glass-border: #d3dae1;  /* conturul cardurilor */
   --glass-shadow: none;
   --line: #d3dae1;          /* linii subtile (header, meniu, separatoare) */
@@ -24,8 +24,8 @@
   --tint-hover: rgba(35, 95, 132, .05);
 
   --header-h: 61px; /* 60px conținut + 1px bordură; trebuie să fie egal cu înălțimea reală a header-ului */
-  --sidebar-w: 112px;
   --content-w: 600px;       /* lățimea maximă a conținutului pe ecrane mici / pătrate */
+  --tab-line: 1px;          /* grosimea liniei de sub meniul selectat / la hover */
   --radius: 6px;
   --radius-sm: 4px;
   --section-gap: 48px;      /* același spațiu deasupra fiecărei secțiuni și al footer-ului */
@@ -200,7 +200,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   font-weight: 500;
   white-space: nowrap;
   color: var(--text-muted);
-  box-shadow: inset 0 -2px 0 transparent; /* linia selecției, invizibilă până la selectare (ca să poată face fade) */
+  box-shadow: inset 0 calc(-1 * var(--tab-line)) 0 transparent; /* linia selecției, invizibilă până la selectare (ca să poată face fade) */
   scroll-snap-align: center;
 }
 .menu-btn .icon { width: 20px; height: 20px; }
@@ -209,7 +209,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .menu-btn.is-active {
   font-weight: 600;
   color: var(--accent);
-  box-shadow: inset 0 -2px 0 var(--accent);
+  box-shadow: inset 0 calc(-1 * var(--tab-line)) 0 var(--accent);
 }
 
 /* Săgețile de derulare (apar doar când meniul nu încape) */
@@ -456,9 +456,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .contact-row:hover { background-color: var(--tint-hover); }
   .contact-row .copy-btn:hover { background-color: transparent; }
 
-  .menu-btn:hover { color: var(--text); background-color: var(--tint-hover); }
-  .menu-btn.is-active:hover { color: var(--text); }
-
 }
 
 /* ==========================================================================
@@ -497,70 +494,82 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ==========================================================================
-   Desktop (bară laterală)
+   Desktop (meniul stă în header, lângă titlu; main.js îl mută acolo)
    ========================================================================== */
 @media (min-width: 900px) {
   :root { --gutter: 32px; --section-gap: 56px; }
 
-  .layout {
-    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
-    align-items: start;
-    min-height: calc(100vh - var(--header-h)); /* bara laterală nu depășește niciodată layout-ul => nu mai alunecă la final */
-    min-height: calc(100dvh - var(--header-h)); /* pe tablete, 100vh include zona barei de adrese => bara laterală ar depăși ecranul și s-ar derula; dvh = înălțimea vizibilă reală */
+  /* Header pe toată lățimea, ca în original (titlu + meniu la stânga, buton zi/noapte la dreapta);
+     fără padding vertical, ca meniul să poată coborî până la linia de jos a header-ului */
+  .site-header {
+    gap: 24px;
+    padding: 0 var(--gutter);
   }
 
-  /* Meniul devine bară laterală */
-  .menu,
-  :root[data-theme="dark"] .menu {
-    position: sticky;
-    top: var(--header-h);
-    height: calc(100vh - var(--header-h) - 1px); /* 1px marjă: pagina are înălțime fracționară și scroll-ul rotunjit ar mișca bara */
-    height: calc(100dvh - var(--header-h) - 1px);
-    overflow-y: auto; /* bara rămâne fixă pe ecran; dacă nu încape, se derulează doar ea */
-    overscroll-behavior: contain;
-    padding: 24px 8px 24px 0; /* fundalul butoanelor pornește de la marginea ecranului și se oprește la 8px de marginea dreaptă a barei */
-    background: var(--surface);
-    border-bottom: 0;
-    border-right: 1px solid var(--line);
+  .layout { display: block; }
+
+  /* Meniul din header: separator vertical + tab-uri orizontale (iconiță + text) */
+  .site-header .menu {
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    flex: none;
+    height: calc(var(--header-h) - 1px); /* = înălțimea interioară a header-ului (fără bordură) */
+    margin-right: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+  .site-header .menu::before {
+    content: "";
+    flex: none;
+    align-self: flex-start;
+    width: 1px;
+    height: 32px;
+    margin: 14px 36px 0 0; /* centrat vertical față de titlu (centrul la 30px) */
+    background: var(--line);
   }
 
   .menu-wrap { display: block; padding: 0; }
   .menu-hint { display: none !important; }
 
   .menu-list {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: flex-start;
     padding: 0;
-    gap: 8px; /* spațiu redus între butoane (înainte: 24px); egal cu spațiul din dreapta */
+    gap: 40px;
     overflow: visible;
   }
 
+  /* Tab: iconiță + text pe un rând */
   .menu-btn {
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    height: auto;
-    padding: 12px 4px; /* conținutul rămâne centrat la 51,5px, ca în varianta originală */
-    border-radius: 0; /* fără curbură */
-    font-size: .75rem;
-    text-align: center;
+    flex-direction: row;
+    gap: 8px;
+    height: calc(var(--header-h) - 1px); /* linia stă deasupra bordurii header-ului */
+    padding: 0;
+    border-radius: 0;
+    font-size: .9375rem;
+    font-weight: 600;
     color: var(--text);
-    box-shadow: inset 3px 0 0 transparent;
+    box-shadow: inset 0 calc(-1 * var(--tab-line)) 0 transparent;
   }
+  .menu-btn .icon { width: 20px; height: 20px; }
 
-  .menu-btn .icon { width: 28px; height: 28px; }
+  /* Selecția: text și linie în culoarea primară; hover: linie în culoarea conturului ferestrelor */
+  .menu-btn.is-active { color: var(--accent); box-shadow: inset 0 calc(-1 * var(--tab-line)) 0 var(--accent); }
+}
 
-  /* Selecția: linie dreaptă lipită de margine + fundal discret pe toată lățimea barei */
-  .menu-btn { font-weight: 600; }
-  .menu-btn.is-active { color: var(--text); background-color: var(--tint); box-shadow: inset 3px 0 0 var(--accent); }
+@media (hover: hover) and (min-width: 900px) {
+  .menu-btn:not(.is-active):hover { box-shadow: inset 0 calc(-1 * var(--tab-line)) 0 var(--glass-border); }
+}
 
+@media (min-width: 900px) {
   .content { padding: 0 32px 40px; max-width: 960px; }
 
   .section-title { font-size: 1.5rem; }
   .card-title { font-size: 1.1875rem; }
 
   .panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 64px; align-items: start; }
-
 }
 
 /* De la 900px: Contact și Juridic pe același rând */
@@ -583,10 +592,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .contact-link .icon,
 .copy-btn.is-copied .icon,
 .legal-block .pill-link .icon { filter: url(#tint-accent); }
-@media (hover: hover) and (min-width: 900px) {
-  .menu-btn:hover .icon { filter: url(#tint-text); }
-  .menu-btn.is-active:hover .icon { filter: url(#tint-accent); }
-}
 @media (min-width: 900px) {
   .menu-btn .icon { filter: url(#tint-text); }
   .menu-btn.is-active .icon { filter: url(#tint-accent); }
