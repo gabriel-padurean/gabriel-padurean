@@ -40,10 +40,10 @@
        id="rect4"
        width="12.7"
        height="12.7"
-       x="9.5367433e-08"
-       y="9.5367426e-08"
-       rx="2.9100578"
-       ry="2.9100578" /><path
+       x="9.5367426e-08"
+       y="9.5367433e-08"
+       rx="1.0579747"
+       ry="1.0579747" /><path
        style="fill:#000000;stroke:#ffffff;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        d="M 9.5596764,6.8317452 V 9.4119919"
        id="path3" /><path
