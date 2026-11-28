@@ -25,7 +25,7 @@
 
   --header-h: 61px; /* 60px conținut + 1px bordură; trebuie să fie egal cu înălțimea reală a header-ului */
   --content-w: 600px;       /* lățimea maximă a conținutului pe ecrane mici / pătrate */
-  --tab-line: 1.5px;        /* grosimea liniei de sub meniul selectat (mobil); pe desktop se suprascrie mai jos */
+  --tab-line: 1.5px;        /* grosimea liniei de sub meniul selectat / la hover (mobil și desktop) */
   --radius: 6px;
   --radius-sm: 4px;
   --section-gap: 48px;      /* același spațiu deasupra fiecărei secțiuni și al footer-ului */
@@ -497,7 +497,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    Desktop (meniul stă în header, lângă titlu; main.js îl mută acolo)
    ========================================================================== */
 @media (min-width: 900px) {
-  :root { --gutter: 32px; --section-gap: 56px; --tab-line: 1px; }
+  :root { --gutter: 32px; --section-gap: 56px; }
 
   /* Header pe toată lățimea, ca în original (titlu + meniu la stânga, buton zi/noapte la dreapta);
      fără padding vertical, ca meniul să poată coborî până la linia de jos a header-ului */
