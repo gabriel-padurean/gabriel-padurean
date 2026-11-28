@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     [prevBtn, nextBtn].forEach(function (btn) {
       btn.addEventListener('click', function () {
-        list.scrollBy({ left: Number(btn.dataset.dir) * Math.max(120, list.clientWidth * 0.6), behavior: 'smooth' });
+        list.scrollBy({ left: Number(btn.dataset.dir) * Math.max(120, list.clientWidth * 0.6), behavior: 'auto' });
       });
     });
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (legal) legal.hidden = !on;
         if (on) {
           if (focus) tab.focus({ preventScroll: true });
-          tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+          tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
         }
       });
     }
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.ResizeObserver) new ResizeObserver(update).observe(box);
       [prev, next].forEach(function (btn) {
         btn.addEventListener('click', function () {
-          box.scrollBy({ left: Number(btn.dataset.dir) * Math.max(120, box.clientWidth * 0.6), behavior: 'smooth' });
+          box.scrollBy({ left: Number(btn.dataset.dir) * Math.max(120, box.clientWidth * 0.6), behavior: 'auto' });
         });
       });
       update();
